@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "stdio.h": "c",
-        "task1": "c"
+        "task1": "c",
+        "task4_i2c_lib.h": "c",
+        "task4_rm.h": "c"
     }
 }
