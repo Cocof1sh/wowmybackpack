@@ -2,6 +2,10 @@
 #include "RM.h"
 #include "task4_i2c_lib.h"
 
+void IIC_Delay_ms(uint16_t ms)
+{
+     HAL_Delay(ms);
+}
 void Start(void)
 {
     SDA_High(); // SDA 线置高电平（释放数据线）
