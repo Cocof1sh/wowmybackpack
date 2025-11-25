@@ -1,0 +1,6 @@
+../Core/Src/main.c:76:6:switch_timer_freq	5
+../Core/Src/main.c:100:6:led_toggle	2
+../Core/Src/main.c:48:6:HAL_TIM_PeriodElapsedCallback	5
+../Core/Src/main.c:115:6:SystemClock_Config	3
+../Core/Src/main.c:22:5:main	1
+../Core/Src/main.c:146:6:Error_Handler	1
