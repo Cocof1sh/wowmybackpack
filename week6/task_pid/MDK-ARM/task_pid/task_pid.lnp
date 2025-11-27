@@ -1,0 +1,27 @@
+--cpu Cortex-M3
+"task_pid\startup_stm32f103xb.o"
+"task_pid\main.o"
+"task_pid\gpio.o"
+"task_pid\tim.o"
+"task_pid\usart.o"
+"task_pid\stm32f1xx_it.o"
+"task_pid\stm32f1xx_hal_msp.o"
+"task_pid\stm32f1xx_hal_gpio_ex.o"
+"task_pid\stm32f1xx_hal_tim.o"
+"task_pid\stm32f1xx_hal_tim_ex.o"
+"task_pid\stm32f1xx_hal.o"
+"task_pid\stm32f1xx_hal_rcc.o"
+"task_pid\stm32f1xx_hal_rcc_ex.o"
+"task_pid\stm32f1xx_hal_gpio.o"
+"task_pid\stm32f1xx_hal_dma.o"
+"task_pid\stm32f1xx_hal_cortex.o"
+"task_pid\stm32f1xx_hal_pwr.o"
+"task_pid\stm32f1xx_hal_flash.o"
+"task_pid\stm32f1xx_hal_flash_ex.o"
+"task_pid\stm32f1xx_hal_exti.o"
+"task_pid\stm32f1xx_hal_uart.o"
+"task_pid\system_stm32f1xx.o"
+--strict --scatter "task_pid\task_pid.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "task_pid.map" -o task_pid\task_pid.axf

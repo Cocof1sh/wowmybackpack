@@ -1,0 +1,25 @@
+--cpu Cortex-M3
+"task-pwm\startup_stm32f103xb.o"
+"task-pwm\main.o"
+"task-pwm\gpio.o"
+"task-pwm\tim.o"
+"task-pwm\stm32f1xx_it.o"
+"task-pwm\stm32f1xx_hal_msp.o"
+"task-pwm\stm32f1xx_hal_gpio_ex.o"
+"task-pwm\stm32f1xx_hal_tim.o"
+"task-pwm\stm32f1xx_hal_tim_ex.o"
+"task-pwm\stm32f1xx_hal.o"
+"task-pwm\stm32f1xx_hal_rcc.o"
+"task-pwm\stm32f1xx_hal_rcc_ex.o"
+"task-pwm\stm32f1xx_hal_gpio.o"
+"task-pwm\stm32f1xx_hal_dma.o"
+"task-pwm\stm32f1xx_hal_cortex.o"
+"task-pwm\stm32f1xx_hal_pwr.o"
+"task-pwm\stm32f1xx_hal_flash.o"
+"task-pwm\stm32f1xx_hal_flash_ex.o"
+"task-pwm\stm32f1xx_hal_exti.o"
+"task-pwm\system_stm32f1xx.o"
+--strict --scatter "task-pwm\task-pwm.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "task-pwm.map" -o task-pwm\task-pwm.axf
