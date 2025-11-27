@@ -10,15 +10,22 @@ void Start(void)
 {
     SDA_High(); // SDA 线置高电平（释放数据线）
     SCL_High();  // SCL 线置高电平（时钟线拉高）
+    IIC_Delay_ms(5); // 延时5ms，确保电平稳定，从机检测到SCL高
     SDA_Low();  // 在 SCL 为高时 SDA 从高变低，形成起始条件
+    IIC_Delay_ms(5); // 延时5ms，保持起始状态，让从机确认
     SCL_Low();  // 时钟线拉低，准备数据传输
+    IIC_Delay_ms(5); // 延时5ms，稳定电平
 }
 
 void Stop(void)
 {
     SDA_Low(); // SDA 线置低电平
     SCL_High();  // SCL 线置高电平
+    IIC_Delay_ms(5); // 延时5ms，确保电平稳定
     SDA_High();  // 在 SCL 为高时 SDA 从低变高，形成停止条件
+    IIC_Delay_ms(5); // 延时5ms，保持停止状态，让从机确认
+    SCL_Low();   // 4. 拉低SCL，释放总线
+    IIC_Delay_ms(5); // 延时5ms，稳定电平
 }
 
 void SendByte(unsigned char data)
@@ -31,7 +38,9 @@ void SendByte(unsigned char data)
         else
             SDA_Low();  // 类似上面如果最高位为0，SDA置低
         SCL_High();  // 时钟线置高，从机读取数据位 //产生时钟上升沿，从机在此时采样数据
+         IIC_Delay_ms(5); // 延时5ms，满足从机采样时间要求
         SCL_Low();   // 时钟线置低，准备下一位数据传输  //时钟下降沿
+        IIC_Delay_ms(3); // 延时3ms，稳定电平
         data <<= 1;  // 数据左移1位，准备发送下一位
     }
 }
@@ -40,9 +49,12 @@ unsigned char ReceiveAck(void)
 {
     unsigned char ack; // 定义变量存储应答状态
     SDA_High();  // 主机释放SDA线（置高），让从机控制
+    IIC_Delay_ms(3); // 延时3ms，稳定电平
     SCL_High(); // 时钟线置高，从机采样数据
+     IIC_Delay_ms(5); // 延时5ms，确保从机已经输出应答电平
     ack = SDA_Read(); // 读取SDA线状态，即从机的应答信号
     SCL_Low();  // 时钟线置低，准备下一位数据传输
+    IIC_Delay_ms(3); // 延时3ms，稳定电平
     return ack;  // 返回应答状态（0=应答、拉低SDA线，1=非应答、SDA线保持高电平）
 }
 
@@ -52,6 +64,6 @@ void SendData(unsigned char data)
     SendByte(data); // 发送数据
     ReceiveAck(); // 接收应答
     Stop(); // 发送停止条件
-    Stop();
+     IIC_Delay_ms(1); // 通信间隙延时1ms，避免连续通信冲突
 }
 //结束啦！！
