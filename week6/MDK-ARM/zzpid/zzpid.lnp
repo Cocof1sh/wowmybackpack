@@ -1,0 +1,25 @@
+--cpu Cortex-M3
+"zzpid\startup_stm32f103xb.o"
+"zzpid\main.o"
+"zzpid\gpio.o"
+"zzpid\tim.o"
+"zzpid\stm32f1xx_it.o"
+"zzpid\stm32f1xx_hal_msp.o"
+"zzpid\stm32f1xx_hal_gpio_ex.o"
+"zzpid\stm32f1xx_hal_tim.o"
+"zzpid\stm32f1xx_hal_tim_ex.o"
+"zzpid\stm32f1xx_hal.o"
+"zzpid\stm32f1xx_hal_rcc.o"
+"zzpid\stm32f1xx_hal_rcc_ex.o"
+"zzpid\stm32f1xx_hal_gpio.o"
+"zzpid\stm32f1xx_hal_dma.o"
+"zzpid\stm32f1xx_hal_cortex.o"
+"zzpid\stm32f1xx_hal_pwr.o"
+"zzpid\stm32f1xx_hal_flash.o"
+"zzpid\stm32f1xx_hal_flash_ex.o"
+"zzpid\stm32f1xx_hal_exti.o"
+"zzpid\system_stm32f1xx.o"
+--strict --scatter "zzpid\zzpid.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "zzpid.map" -o zzpid\zzpid.axf
