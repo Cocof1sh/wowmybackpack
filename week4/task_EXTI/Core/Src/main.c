@@ -1,14 +1,30 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : Main program body
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2025 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -22,7 +38,6 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -43,13 +58,11 @@ void LED_OFF(void);  // LED熄灭（高电平）
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-// LED点亮（PC13低电平）
 void LED_ON(void)
 {
   HAL_GPIO_WritePin(LED_PORT, LED_PIN, GPIO_PIN_RESET);
 }
 
-// LED熄灭（PC13高电平）
 void LED_OFF(void)
 {
   HAL_GPIO_WritePin(LED_PORT, LED_PIN, GPIO_PIN_SET);
@@ -73,31 +86,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
-  /* Configure the system clock */
   SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
-
-  /* Initialize all configured peripherals */
   MX_GPIO_Init();
 
   /* USER CODE BEGIN 2 */
   LED_OFF();  // 初始化熄灭
-  HAL_GPIO_WritePin(LED_PORT, LED_PIN, GPIO_PIN_SET);  // 强制熄灭
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -106,9 +103,9 @@ int main(void)
   {
     if (key_exti_flag == 1)
     {
-      LED_ON();               // 按键触发后点亮LED
-      HAL_Delay(LED_ON_TIME); // 保持300ms
-      LED_OFF();              // 熄灭LED
+      LED_ON();
+      HAL_Delay(LED_ON_TIME); // 匹配宏定义1000ms
+      LED_OFF();
       key_exti_flag = 0;      // 清除标志位
     }
     /* USER CODE END WHILE */
@@ -176,16 +173,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
 
-  // NVIC配置：使能EXTI9_5_IRQn（PA5对应通道）
+  // NVIC配置
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 }
 
 /* USER CODE BEGIN 4 */
-
 /* USER CODE END 4 */
 
 /**
